@@ -1,0 +1,138 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  /** og:type — 'article' for blog posts */
+  type?: string;
+  /** absolute-path URL of a social-preview image */
+  image?: string;
+}
+const { title, description, type = 'website', image = '/images/hero.webp' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/design', label: 'Design' },
+  { href: '/blog', label: 'Blog' },
+];
+const current = Astro.url.pathname;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/webp" href="/favicon.webp" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Wyldcard Blog" href="/rss.xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:site_name" content="Wyldcard" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a class="brand" href="/">
+          <img src="/images/logo-white.webp" alt="" width="36" height="36" />
+          <span>Wyldcard</span>
+        </a>
+        <div class="links">
+          {nav.map(({ href, label }) => (
+            <a href={href} aria-current={current === href || (href !== '/' && current.startsWith(href)) ? 'page' : undefined}>{label}</a>
+          ))}
+        </div>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p>
+        <a href="https://www.crowdsupply.com/wyldcard/wyldcard-devkit">DevKit on Crowd Supply</a> ·
+        <a href="https://discord.gg/Gsa7hBKvvY">Discord</a> ·
+        <a href="mailto:jonah@wyldcard.io">jonah@wyldcard.io</a>
+      </p>
+      <p class="fine">© {new Date().getFullYear()} Wyldcard</p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: dark;
+    --bg: #101216;
+    --bg-raised: #1a1e26;
+    --text: #e8e6e1;
+    --text-dim: #9a978f;
+    --accent: #e8b64c;
+    --max: 46rem;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 1.05rem/1.65 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  header nav {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+  }
+  .links { display: flex; gap: 1.25rem; }
+  .links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 0.25rem 0;
+  }
+  .links a:hover { color: var(--text); }
+  .links a[aria-current='page'] {
+    color: var(--text);
+    border-bottom: 2px solid var(--accent);
+  }
+  main {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 3rem;
+  }
+  main img, main video, main iframe { max-width: 100%; height: auto; border-radius: 6px; }
+  a { color: var(--accent); }
+  h1, h2, h3 { line-height: 1.25; }
+  pre {
+    background: var(--bg-raised);
+    padding: 0.9rem 1.1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+  }
+  code { font-family: ui-monospace, 'Cascadia Code', Menlo, monospace; }
+  footer {
+    border-top: 1px solid var(--bg-raised);
+    text-align: center;
+    padding: 1.5rem 1.25rem 2.5rem;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+  footer .fine { font-size: 0.85rem; }
+</style>

@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const fmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Base title="Blog — Wyldcard" description="News and essays from Wyldcard: e-paper gaming cards, game design, and build logs.">
+  <h1>Blog</h1>
+  <ul class="posts">
+    {posts.map((post) => (
+      <li>
+        <a href={`/blog/${post.id}`}>{post.data.title}</a>
+        <time datetime={post.data.pubDate.toISOString().slice(0, 10)}>{fmt.format(post.data.pubDate)}</time>
+        <p>{post.data.description}</p>
+      </li>
+    ))}
+  </ul>
+</Base>
+
+<style>
+  .posts { list-style: none; padding: 0; }
+  .posts li { margin-bottom: 2rem; }
+  .posts a { font-size: 1.3rem; font-weight: 600; text-decoration: none; }
+  .posts a:hover { text-decoration: underline; }
+  .posts time { display: block; color: var(--text-dim); font-size: 0.9rem; margin-top: 0.15rem; }
+  .posts p { margin: 0.35rem 0 0; color: var(--text-dim); }
+</style>
