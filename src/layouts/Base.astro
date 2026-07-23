@@ -66,12 +66,13 @@ const current = Astro.url.pathname;
 
 <style is:global>
   :root {
-    color-scheme: dark;
-    --bg: #101216;
-    --bg-raised: #1a1e26;
-    --text: #e8e6e1;
-    --text-dim: #9a978f;
+    color-scheme: light;
+    --bg: #ffffff;
+    --bg-raised: #f3f1ec;
+    --text: #1d1c1a;
+    --text-dim: #6d6a63;
     --accent: #e8b64c;
+    --link: #9c6b0e;
     --max: 46rem;
   }
   * { box-sizing: border-box; }
@@ -117,7 +118,7 @@ const current = Astro.url.pathname;
     padding: 1.5rem 1.25rem 3rem;
   }
   main img, main video, main iframe { max-width: 100%; height: auto; border-radius: 6px; }
-  a { color: var(--accent); }
+  a { color: var(--link); }
   h1, h2, h3 { line-height: 1.25; }
   pre {
     background: var(--bg-raised);

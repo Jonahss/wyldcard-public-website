@@ -4,6 +4,11 @@ description: "Introducing Wyldcard, a new paradigm for tabletop gaming, trading 
 pubDate: 2022-11-29
 ---
 
+<video autoplay muted loop playsinline width="1920" height="1080">
+  <source src="/videos/introducing-wyldcard.webm" type="video/webm" />
+  <source src="/videos/introducing-wyldcard.mp4" type="video/mp4" />
+</video>
+
 Behold!  Physical playing cards which can change!
 
 Based on an idea I had in 2014, built in my spare time over the past two years, I’ve finally completed my first physical prototypes.  
