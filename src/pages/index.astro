@@ -7,7 +7,10 @@ import Base from '../layouts/Base.astro';
   description="Wyldcard: plastic cards with e-paper screens that meld the physical and the digital. Cards that change as you play, remember stats, and connect with friends."
 >
   <section class="hero">
-    <img src="/images/hero.webp" alt="Wyldcard e-paper gaming cards on their plinths" width="1435" height="956" fetchpriority="high" />
+    <video autoplay muted loop playsinline width="1920" height="1080">
+      <source src="/videos/introducing-wyldcard.webm" type="video/webm" />
+      <source src="/videos/introducing-wyldcard.mp4" type="video/mp4" />
+    </video>
     <h1>A new paradigm in tabletop gaming.</h1>
     <p class="tagline">Plastic cards with e-paper screens that meld the physical and the digital.</p>
   </section>
@@ -26,6 +29,7 @@ import Base from '../layouts/Base.astro';
     <p class="cta-row">
       <a class="cta" href="https://www.crowdsupply.com/wyldcard/wyldcard-devkit">Order Your DevKit Here</a>
     </p>
+    <img src="/images/hero.webp" alt="Wyldcard e-paper gaming cards" width="1435" height="956" loading="lazy" />
   </section>
 
   <section>

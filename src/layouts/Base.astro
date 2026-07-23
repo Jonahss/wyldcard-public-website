@@ -11,7 +11,6 @@ const { title, description, type = 'website', image = '/images/hero.webp' } = As
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const nav = [
   { href: '/', label: 'Home' },
-  { href: '/design', label: 'Design' },
   { href: '/blog', label: 'Blog' },
 ];
 const current = Astro.url.pathname;
